@@ -64,3 +64,73 @@ function greet(name) { //name is a parameter for greet function
 
 greet("heshan") // Passing an argument to greet function
 ~~~
+
+# Operators
+- Arithmetic
+- Assignment
+- Comparison
+- Logical
+- Bitwise
+
+Arithmetic
+~~~js
+let x = 10;
+let y = 3;
+
+console.log(x + y); // 13  x + y => expression where x and y are operands
+console.log(x - y); // 7
+console.log(x * y); // 30
+console.log(x / y); // 3.333
+console.log(x % y); // 1
+console.log(x ** y); // 1000
+console.log(++x); // Increment Operator
+console.log(--x); // Decrement Operator
+~~~
+
+Assignment
+~~~js
+let x = 10;
+
+x = x + 5;
+x += 5;
+
+x = x * 3;
+x *= 3;
+~~~
+
+Comparison
+~~~js
+let x = 10;
+
+//Relational Operators
+console.log(x > 10);
+console.log(x >= 10);
+console.log(x < 10);
+console.log(x <= 10);
+
+//Equality
+console.log(x === 10);
+console.log(x !== 10);
+
+// Strict Equality(Type + Value)
+console.log(1 === 1);
+console.log('1' === 1);
+
+// Lose Equality(Value)
+console.log(1 == 1);
+console.log('1' == 1);
+~~~
+
+Ternary Operator
+~~~js
+let points = 110;
+let type = (points > 100) ? 'gold' : 'silver';
+console.log(type);
+~~~
+
+Logical Operators
+~~~js
+console.log(true && true); // Logical AND
+console.log(true || false); // Logical OR
+console.log(!false); // Logical NOT
+~~~

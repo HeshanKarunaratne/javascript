@@ -1,5 +1,3 @@
-function greet(name) { //name is a parameter for greet function
-    console.log("hello " + name);
-}
-
-greet("heshan") // Passing an argument to greet function
+console.log(true && true); // Logical AND
+console.log(true || false); // Logical OR
+console.log(!false); // Logical NOT
