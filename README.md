@@ -157,3 +157,22 @@ console.log(0 | 4 | 2); //6
 // 00000010
 // 00000110
 ~~~
+
+# for-in loop
+~~~js
+const person = {
+    name: 'heshan',
+    age: 30
+}
+
+for (let key in person)
+    console.log(key, person[key]);
+~~~
+
+# for-of loop
+~~~js
+const colors = ['red', 'green', 'blue'];
+
+for (let color of colors)
+    console.log(color);
+~~~
