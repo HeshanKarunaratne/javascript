@@ -195,3 +195,34 @@ function fizzBuzz(input) {
     return input;
 }
 ~~~
+
+SpeedLimit Exercise
+~~~js
+const output = checkSpeed(130);
+console.log("output:", output);
+
+function checkSpeed(input) {
+    const speedLimit = 70;
+    const MaxPoint = 12;
+    const kmPerPoint = 5;
+
+    const speed = Math.floor(input);
+    if (speed < speedLimit + kmPerPoint) return 'ok';
+
+    const pointes = Math.floor((speed - speedLimit) / kmPerPoint);
+
+    if (pointes >= 1 && pointes < MaxPoint) return pointes;
+    if (pointes >= MaxPoint) return 'License Suspended';
+}
+~~~
+
+ShowNumbers Exercise
+~~~js
+showNumbers(50);
+function showNumbers(limit) {
+    for (let i = 0; i <= limit; i++) {
+        const type = (i % 2 === 0) ? 'EVEN' : 'ODD';
+        console.log(i, type);
+    }
+}
+~~~
