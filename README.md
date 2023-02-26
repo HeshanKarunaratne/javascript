@@ -226,3 +226,37 @@ function showNumbers(limit) {
     }
 }
 ~~~
+
+CountTruthy Exercise
+~~~js
+let count = countTruthy([0, 1, undefined, null, NaN, 3, '', 'adfdafa', 'dafda']);
+console.log("count", count);
+
+function countTruthy(array) {
+    let count = 0;
+    for (let value of array)
+        if (value)
+            count++;
+    return count;
+}
+~~~
+
+ShowProperties Exercise
+
+~~~js
+const movie = {
+    title: 'a',
+    releaseYear: 2018,
+    rating: 4.5,
+    director: 'b'
+};
+
+showProperties(movie);
+
+function showProperties(obj) {
+    for (let key in obj) {
+        if (typeof obj[key] === 'string')
+            console.log(key, obj[key]);
+    }
+}
+~~~
