@@ -260,3 +260,36 @@ function showProperties(obj) {
     }
 }
 ~~~
+
+~~~js
+const value = sum(5);
+console.log(value);
+
+function sum(limit) {
+    let sum = 0;
+
+    for (let i = 0; i <= limit; i++)
+        if (i % 3 === 0 || i % 5 === 0) 
+            sum += i;
+
+    return sum;
+}
+~~~
+
+ShowPrimes Exercise
+~~~js
+showPrimes(10);
+
+function showPrimes(limit) {
+    for (let number = 2; number <= limit; number++)
+        if (isPrime(number)) console.log(number);
+}
+
+function isPrime(number) {
+    for (let factor = 2; factor < number; factor++)
+        if (number % factor === 0)
+            return false;
+
+    return true;
+}
+~~~

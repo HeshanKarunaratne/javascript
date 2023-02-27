@@ -1,15 +1,14 @@
-const movie = {
-    title: 'a',
-    releaseYear: 2018,
-    rating: 4.5,
-    director: 'b'
-};
+showPrimes(10);
 
-showProperties(movie);
+function showPrimes(limit) {
+    for (let number = 2; number <= limit; number++)
+        if (isPrime(number)) console.log(number);
+}
 
-function showProperties(obj) {
-    for (let key in obj) {
-        if (typeof obj[key] === 'string')
-            console.log(key, obj[key]);
-    }
+function isPrime(number) {
+    for (let factor = 2; factor < number; factor++)
+        if (number % factor === 0)
+            return false;
+
+    return true;
 }
