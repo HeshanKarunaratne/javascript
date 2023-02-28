@@ -388,3 +388,24 @@ function Circle(radius) {
 Circle.call({}, 1);
 const circle = new Circle(1);
 ~~~
+
+- Primitives are copied by their value
+- Objects are copied by their reference
+
+~~~js
+let x = 10;
+let y = x;
+
+x = 20;
+console.log("x:", x);
+console.log("y:", y);
+~~~
+
+~~~js
+let x = { value: 10 }
+let y = x;
+
+x.value = 20;
+console.log("x:", x);
+console.log("y:", y);
+~~~
