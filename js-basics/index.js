@@ -1,14 +1,9 @@
-showPrimes(10);
-
-function showPrimes(limit) {
-    for (let number = 2; number <= limit; number++)
-        if (isPrime(number)) console.log(number);
+function Circle(radius) {
+    this.radius = radius;
+    this.draw = function () {
+        console.log("draw called");
+    }
 }
 
-function isPrime(number) {
-    for (let factor = 2; factor < number; factor++)
-        if (number % factor === 0)
-            return false;
-
-    return true;
-}
+Circle.call({}, 1);
+const circle = new Circle(1);

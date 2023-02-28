@@ -293,3 +293,98 @@ function isPrime(number) {
     return true;
 }
 ~~~
+
+# Objects
+
+~~~js
+const circle = {
+    radius: 3,
+    location: {
+        x: 1,
+        y: 1
+    },
+    isVisible: true,
+    draw: () => console.log("draw called"),
+    move: () => console.log("move called")
+}
+
+circle.draw();
+circle.move();
+~~~
+
+# Factory Functions
+- Use Camel naming convention
+~~~js
+function createCircle(radius) {
+    return {
+        radius,
+        draw() {
+            console.log("draw called");
+        }
+    }
+}
+
+const circle1 = createCircle(1);
+console.log(circle1);
+
+const circle2 = createCircle(10);
+console.log(circle2);
+~~~
+
+# Constructor Functions
+- Use Pascal naming convention
+~~~js
+function Circle(radius) {
+    this.radius = radius;
+    this.draw = function () {
+        console.log("draw called");
+    }
+}
+
+const circle = new Circle(1);
+console.log(circle);
+~~~
+
+# Dynamic nature of an object
+~~~js
+const circle = {
+    radius: 1
+}
+
+circle.color = 'yellow';
+delete circle.radius;
+console.log(circle);
+~~~
+
+Functions can be declared as below as well
+~~~js
+function Circle(radius) {
+    this.radius = radius;
+    this.draw = function () {
+        console.log("draw called");
+    }
+}
+
+const Circle1 = new Function('radius', `
+this.radius = radius;
+    this.draw = function () {
+        console.log("draw called");
+    }
+`)
+
+const circle = new Circle1(10);
+console.log(circle);
+~~~
+
+Can call a function like below as well
+~~~js
+function Circle(radius) {
+    this.radius = radius;
+    this.draw = function () {
+        console.log("draw called");
+    }
+}
+
+Circle.call({}, 1);
+const circle = new Circle(1);
+~~~
