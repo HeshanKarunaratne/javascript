@@ -1,7 +1,7 @@
-const circle = {
-    radius: 3,
-    draw: () => console.log("draw called")
-}
+//String primitive
+const message = 'hi';
+console.log(typeof message);
 
-const another = { ...circle };
-console.log(another);
+//String object
+const another = new String('hi');
+console.log(typeof another);
