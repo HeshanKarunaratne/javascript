@@ -1,6 +1,7 @@
-let x = { value: 10 }
-let y = x;
+const circle = {
+    radius: 3,
+    draw: () => console.log("draw called")
+}
 
-x.value = 20;
-console.log("x:", x);
-console.log("y:", y);
+const another = { ...circle };
+console.log(another);

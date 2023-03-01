@@ -409,3 +409,45 @@ x.value = 20;
 console.log("x:", x);
 console.log("y:", y);
 ~~~
+
+- Arrays and maps are iterables
+- Objects are not iterables
+~~~js
+const circle = {
+    radius: 3,
+    draw: () => console.log("draw called")
+}
+
+for (let key in circle)
+    console.log(key, circle[key]);
+
+for (let key of Object.keys(circle))
+    console.log(key);
+
+for (let entry of Object.entries(circle))
+    console.log(entry);
+~~~
+
+- Cloning an Object
+~~~js
+const circle = {
+    radius: 3,
+    draw: () => console.log("draw called")
+}
+
+const another = {};
+for (let key in circle)
+    another[key] = circle[key];
+
+console.log(another);
+~~~
+
+- Better way to Clone an object
+~~~js
+const another = Object.assign({}, circle);
+console.log(another);
+
+//Spread Operator
+const another = { ...circle };
+console.log(another);
+~~~
