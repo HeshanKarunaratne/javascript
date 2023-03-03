@@ -462,3 +462,97 @@ console.log(typeof message);
 const another = new String('hi');
 console.log(typeof another);
 ~~~
+
+# Template Literals
+~~~js
+const message1 = "This is \n" +
+    "\'first\' value";
+
+const message2 = `This is the
+'second' value`;
+
+console.log(message1);
+console.log(message2);
+~~~
+
+# Date
+~~~js
+const now = new Date();
+const date1 = new Date("May 11 2018 09:00");
+const date2 = new Date(2018, 4, 11, 9);
+
+console.log(now);
+console.log(date1);
+console.log(date2);
+~~~
+
+ShowAddress Exercise
+~~~js
+const address = {
+    street: "Templars Road",
+    city: "Colombo",
+    zipCode: 10500
+}
+
+function showAddress(obj) {
+    for (let key in obj)
+        console.log(key, obj[key]);
+}
+
+showAddress(address);
+~~~
+
+Exercise
+~~~js
+let address1 = createAddress("Street", "Colombo", 123);
+console.log(address1);
+
+let address2 = new Address("Street", "Colombo", 123);
+console.log(address2);
+
+//Factory Function
+function createAddress(street, city, zipCode) {
+    return {
+        street,
+        city,
+        zipCode
+    }
+}
+
+// Constructor Function
+function Address(street, city, zipCode) {
+    this.street = street;
+    this.city = city;
+    this.zipCode = zipCode;
+}
+~~~
+
+Exercise
+~~~js
+let address1 = new Address("Street", "Colombo", 123);
+let address2 = new Address("Street", "Colombo", 123);
+
+console.log(areEqual(address1, address2));
+console.log(areSame(address1, address2));
+
+function Address(street, city, zipCode) {
+    this.street = street;
+    this.city = city;
+    this.zipCode = zipCode;
+}
+
+function areEqual(address1, address2) {
+    let isEqual = true;
+    for (let key in address1) {
+        if (address1[key] !== address2[key]) {
+            isEqual = false;
+            break;
+        }
+    }
+    return isEqual;
+}
+
+function areSame(address1, address2) {
+    return address1 === address2;
+}
+~~~
