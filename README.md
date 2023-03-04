@@ -556,3 +556,114 @@ function areSame(address1, address2) {
     return address1 === address2;
 }
 ~~~
+
+# Arrays
+
+- Adding more to arrays from beginning, middle and end
+~~~js
+const numbers = [3, 4];
+
+//End
+numbers.push(5, 6);
+
+//Beginning
+numbers.unshift(1, 2);
+
+//Middle
+numbers.splice(2, 0, 'a', 'b');
+
+console.log(numbers);
+~~~
+
+- Find Elements in Array Primitives
+~~~js
+const numbers = [1, 2, 3, 1, 4];
+console.log(numbers.indexOf(1));
+console.log(numbers.lastIndexOf(1));
+console.log(numbers.includes(1));
+
+const courses = [
+    { id: 1, name: 'a' },
+    { id: 2, name: 'b' }
+]
+
+console.log(courses.includes({ id: 1, name: 'a' }));
+console.log(courses.includes(courses[0]));
+~~~
+
+- Find Elements in Reference Type
+~~~js
+const courses = [
+    { id: 1, name: 'a' },
+    { id: 2, name: 'b' }
+]
+
+const course = courses.find(function (course) {
+    return course.name === 'a';
+});
+console.log(course);
+
+const course1 = courses.findIndex(function (course) {
+    return course.name === 'a';
+});
+console.log(course1);
+~~~
+
+- Arrow Functions
+~~~js
+const course = courses.find(course => course.name === 'a');
+~~~
+
+- Remove element from an array
+~~~js
+const numbers = [1, 2, 3, 4, 5];
+
+//End
+const last = numbers.pop();
+
+//Beginning
+const first = numbers.shift();
+
+//Middle
+numbers.splice(2, 1);
+
+console.log(numbers);
+~~~
+
+- Emptying an Array
+~~~js
+let numbers = [1, 2, 3, 4, 5];
+
+//Solution 1
+numbers = [];
+console.log(numbers);
+
+//Solution 2
+numbers.length = 0;
+console.log(numbers);
+
+//Solution 3
+numbers.splice(0, numbers.length);
+console.log(numbers);
+
+//Solution 4
+while (numbers.length > 0)
+    numbers.pop()
+
+console.log(numbers);
+~~~
+
+- Combining and Slicing 2 arrays
+- If primitive type copied by value and if reference type copied by reference
+~~~js
+const first = [1, 2, 3];
+const second = [4, 5, 6];
+
+//Combine 2 Arrays
+const combined = first.concat(second);
+
+//Slice an Array 
+const slice = combined.slice(2);
+console.log(combined);
+console.log(slice);
+~~~
