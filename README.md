@@ -667,3 +667,108 @@ const slice = combined.slice(2);
 console.log(combined);
 console.log(slice);
 ~~~
+
+- Spread Operator
+~~~js
+const first = [1, 2, 3];
+const second = [4, 5, 6];
+
+const combine = [...first, 'a', ...second, 'b'];
+console.log(combine);
+~~~
+
+- Iterating an Array
+~~~js
+const numbers = [1, 2, 3];
+
+for (let number of numbers)
+    console.log(number)
+
+numbers.forEach(number => console.log(number));
+~~~
+
+- Join Method
+~~~js
+const numbers = [1, 2, 3];
+const joined = numbers.join(',');
+
+console.log(joined);
+~~~
+- Sorting and reversing
+~~~js
+const numbers = [1, 4, 5, 2, 6, 3];
+numbers.sort();
+console.log(numbers);
+
+numbers.reverse();
+console.log(numbers);
+~~~
+
+- Extended Sorting
+~~~js
+const courses = [
+    { id: 1, name: 'Node' },
+    { id: 2, name: 'java' },
+]
+
+courses.sort(function (a, b) {
+    // a < b => -1
+    // a > b => 1
+    // a === b => 0
+
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+
+});
+console.log(courses);
+~~~
+
+- every(): Checks every item in the array match the criteria
+- some(): Checks at least one item in the array match the criteria
+
+~~~js
+const numbers = [1, 4, 5, 2, 6, 3];
+
+const allPositive = numbers.every(function (value) {
+    return value >= 0;
+});
+
+console.log(allPositive);
+
+const atLeastOnePositive = numbers.some(function (value) {
+    return value >= 0;
+});
+
+console.log(atLeastOnePositive);
+~~~
+
+- Filtering
+~~~js
+const numbers = [1, -4, 5, 2, 6, 3];
+
+const filtered = numbers.filter(number => number >= 0);
+console.log(filtered);
+~~~
+
+- map()
+~~~js
+const numbers = [1, -4, 5, 2, 6, 3];
+
+const filtered = numbers.filter(number => number >= 0);
+const items = filtered.map(n => '<li>' + n + '</li>');
+const html = '<ul>' + items.join('') + '</ul>';
+console.log(html);
+~~~
+
+- If you are returning an object in arrow functions need to surround the obj with paranthesis
+~~~js
+const numbers = [1, -4, 5, 2, 6, 3];
+const items = numbers
+    .filter(number => number >= 0)
+    .map(n => ({ values: n }));
+console.log(items);
+~~~
