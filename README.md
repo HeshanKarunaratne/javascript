@@ -903,3 +903,32 @@ const titles = movies
 
 console.log(titles);
 ~~~
+
+- Functions
+~~~js
+// Function Declaration
+function walk() {
+    console.log("walk");
+}
+
+// Anonymous Function Expression
+let run = function () {
+    console.log("run");
+}
+
+walk();
+run();
+~~~
+
+- Hoisting: Process of moving Functions Declarations to the top
+- Arguments of a function
+~~~js
+function sum() {
+    let total = 0;
+    for (value of arguments)
+        total += value;
+    return total;
+}
+
+console.log(sum(1, 2, 3, 4, 5));
+~~~
