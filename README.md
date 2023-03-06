@@ -772,3 +772,134 @@ const items = numbers
     .map(n => ({ values: n }));
 console.log(items);
 ~~~
+
+- reduce()
+~~~js
+const numbers = [1, -4, 5, 2, 6, 3];
+
+let sum = 0;
+for (let n of numbers)
+    sum += n;
+console.log(sum);
+
+const reduce = numbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+console.log(reduce);
+~~~
+
+- Exercise 1
+~~~js
+const numbers = arrayFromRange(1, 4);
+console.log(numbers);
+
+function arrayFromRange(min, max) {
+    const arr = [];
+    for (let i = min; i <= max; i++)
+        arr.push(i);
+    return arr;
+}
+~~~
+
+- Exercise 2
+~~~js
+const numbers = [1, 2, 3, 4];
+console.log(includes(numbers, 2));
+
+function includes(array, searchElement) {
+    for (let number of array)
+        if (number === searchElement)
+            return true;
+    return false;
+}
+~~~
+
+- Exercise 3
+~~~js
+const numbers = [1, 2, 3, 4, 1];
+console.log(except(numbers, [1,2,5]));
+
+function except(array, excluded) {
+    const output = [];
+    for (let number of array)
+        if (!excluded.includes(number))
+            output.push(number);
+    return output;
+}
+~~~
+
+- Exercise 4
+~~~js
+const numbers = [1, 2, 3, 4];
+console.log(move(numbers, 2, -3));
+
+function move(array, index, offset) {
+
+    const position = index + offset;
+    if (position >= array.length || position < 0) {
+        console.error("Invalid offset");
+        return;
+    }
+
+    let output = [...array];
+    const element = output.splice(index, 1)[0];
+    output.splice(position, 0, element);
+    return output;
+}
+~~~
+
+- Exercise 5
+~~~js
+const numbers = [1, 2, 3, 4, 1];
+console.log(countOccurences(numbers, -1));
+
+function countOccurences(array, searchElement) {
+    let count = 0;
+    //Sol 1
+    for (let number of array)
+        if (number === searchElement)
+            count++;
+    return count;
+
+    //Sol2
+    return array.reduce((accumulator, currentValue) => {
+        return (currentValue === searchElement) ? accumulator + 1 : accumulator;
+    }, 0);
+}
+~~~
+
+- Exercise 6
+~~~js
+const numbers = [1, 2, 3, 4, 1];
+console.log(getMax(numbers));
+
+function getMax(array) {
+    if (array.length === 0) return undefined;
+
+    //Sol1
+    let max = Number.MIN_VALUE;
+    for (let number of array)
+        if (number > max)
+            max = number;
+    return max;
+
+    //Sol2
+    return array.reduce((a, current) => (current > a) ? current : a);
+}
+~~~
+
+- Exercise 7
+~~~js
+const movies = [
+    { title: "a", year: 2018, rating: 4.5 },
+    { title: "b", year: 2018, rating: 4.7 },
+    { title: "c", year: 2018, rating: 3 },
+    { title: "d", year: 2017, rating: 4.5 },
+]
+
+const titles = movies
+    .filter(m => m.year === 2018 && m.rating > 4)
+    .sort((a, b) => a.rating - b.rating)
+    .reverse()
+    .map(m => m.title);
+
+console.log(titles);
+~~~
