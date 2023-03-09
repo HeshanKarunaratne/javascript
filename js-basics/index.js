@@ -1,8 +1,22 @@
-function sum() {
-    let total = 0;
-    for (value of arguments)
-        total += value;
-    return total;
+const person = {
+    firstName: 'heshan',
+    lastName: 'Karunaratne',
+    get fullName() {
+        return `${person.firstName} ${person.lastName}`;
+    },
+    set fullName(value) {
+        if (typeof value !== 'string') throw new Error("Invalid input");
+
+        const parts = value.split(" ");
+        if (parts.length !== 2) throw new Error("Enter first name and last name");
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+}
+try {
+    person.fullName = '';
+} catch (e) {
+    alert(e);
 }
 
-console.log(sum(1, 2, 3, 4, 5));
+console.log(person.fullName);

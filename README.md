@@ -932,3 +932,70 @@ function sum() {
 
 console.log(sum(1, 2, 3, 4, 5));
 ~~~
+
+- REST parameter must be the last parameter in a function
+~~~js
+function sum(...prices) {
+    return prices.reduce((a, b) => a + b);
+}
+
+console.log(sum(1, 2, 3, 4, 5));
+~~~
+
+- Default values for Parameters
+~~~js
+function interest(principal, rate = 3.5, years = 5) {
+    return principal * rate / 100 * years;
+}
+
+console.log(interest(10000));
+~~~
+
+- Getters and Setters
+~~~js
+const person = {
+    firstName: 'heshan',
+    lastName: 'Karunaratne',
+    get fullName() {
+        return `${person.firstName} ${person.lastName}`;
+    },
+    set fullName(value) {
+        const parts = value.split(" ");
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+}
+person.fullName = "H Karu";
+console.log(person.fullName);
+~~~
+
+- Try-Catch
+~~~js
+const person = {
+    firstName: 'heshan',
+    lastName: 'Karunaratne',
+    get fullName() {
+        return `${person.firstName} ${person.lastName}`;
+    },
+    set fullName(value) {
+        if (typeof value !== 'string') throw new Error("Invalid input");
+
+        const parts = value.split(" ");
+        if (parts.length !== 2) throw new Error("Enter first name and last name");
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+}
+try {
+    person.fullName = '';
+} catch (e) {
+    alert(e);
+}
+
+console.log(person.fullName);
+~~~
+
+- Var and Let
+- var adds variable to the window object which is not a good practice.
+- var creates variables which are function scoped, while let creates variables which are block scoped
+- Use let and const when necessary
