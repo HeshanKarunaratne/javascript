@@ -999,3 +999,49 @@ console.log(person.fullName);
 - var adds variable to the window object which is not a good practice.
 - var creates variables which are function scoped, while let creates variables which are block scoped
 - Use let and const when necessary
+
+- 'This' is the object that is executing the current function
+~~~js
+//method -> obj
+const video = {
+    title: 'a',
+    play() {
+        console.log(this);
+    }
+}
+
+video.stop = function () {
+    console.log(this);
+}
+
+video.stop();
+~~~
+
+~~~js
+//function -> global(window, global)
+const video = {
+    title: 'a',
+    play() {
+        console.log(this);
+    }
+}
+
+function playVideo() {
+    console.log(this);
+}
+
+playVideo();
+~~~
+~~~js
+const video = {
+    title: 'a',
+    tags: ['a', 'b', 'c'],
+    showTags() {
+        this.tags.forEach(function (tag) {
+            console.log(this.title, tag);
+        }, this);
+    }
+}
+
+video.showTags();
+~~~
