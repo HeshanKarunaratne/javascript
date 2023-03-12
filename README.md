@@ -1086,3 +1086,66 @@ function countOccurences(array, searchElement) {
     }, 0);
 }
 ~~~
+
+# OOP
+- 4 pillars 
+    1. Encapsulation: Group related variables and methods together to reduce complexity
+    2. Abstraction: Hiding the details and complexity
+    3. Inheritance: Eliminate redundant code
+    4. Polymorphism: Objects that take many forms 
+
+- We combine group of related variables and functions into a unit called an Object.
+- These variables are known as 'Properties' and functions are known as 'Methods'.
+
+- Below code have 2 properties and 1 method
+~~~js
+const circle = {
+    radius: 1,
+    location: {
+        x: 1,
+        y: 1
+    },
+    draw() {
+        console.log("draw");
+    }
+};
+~~~
+
+- Factory Functions
+~~~js
+function createCircle(radius) {
+    return {
+        radius,
+        draw() {
+            console.log("draw circle with ", this.radius);
+        }
+    };
+}
+
+const circle = createCircle(2);
+circle.draw();
+~~~
+
+- Abstraction
+~~~js
+function Circle(radius) {
+    this.radius = radius;
+
+    let defaultLocation = { x: 0, y: 0 };
+
+    let computeOptimizedLocation = function (factor) {
+        console.log("factor", factor);
+    }
+
+    this.draw = function () {
+        let x,y;
+        computeOptimizedLocation(0.1);
+        console.log("draw");
+    }
+}
+
+const circle = new Circle(10);
+circle.draw();
+~~~
+
+- Closure: Scope is temporary, but closure is not. Everytime draw() method is called x,y local variables are reinitialized and after draw() method is finished x,y are removed. But computeOptimizedLocation variable resides in the memory as for the draw() methods closure.
