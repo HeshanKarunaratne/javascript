@@ -1149,3 +1149,149 @@ circle.draw();
 ~~~
 
 - Closure: Scope is temporary, but closure is not. Everytime draw() method is called x,y local variables are reinitialized and after draw() method is finished x,y are removed. But computeOptimizedLocation variable resides in the memory as for the draw() methods closure.
+
+- Getters and Setters
+~~~js
+function Circle(radius) {
+    this.radius = radius;
+
+    let defaultLocation = { x: 0, y: 0 };
+
+    this.draw = function () {
+        console.log("draw");
+    }
+
+    Object.defineProperty(this, 'defaultLocation', {
+        get: function () {
+            return defaultLocation;
+        },
+        set: function (value) {
+            if (!value.x || !value.y)
+                throw new Error("Invalid Location");
+            defaultLocation = value;
+        }
+    })
+}
+
+const circle = new Circle(10);
+circle.defaultLocation = { x: 10, y: 10 };
+~~~
+
+- Stopwatch Exercise
+~~~js
+function StopWatch() {
+    let timer;
+    let duration = 0;
+    let isStarted = false;
+
+    this.start = function () {
+        if (this.isStarted) throw new Error("Already Started");
+
+        isStarted = !isStarted;
+        timer = new Date();
+    }
+
+    this.stop = function () {
+        if (!isStarted) throw new Error("Already Stopped");
+
+        isStarted = !isStarted;
+        this.duration = (new Date() - timer) / 1000;
+    }
+
+    this.reset = function () {
+        this.duration = 0;
+        isStarted = false;
+    }
+    Object.defineProperty(this, 'duration', {
+        get: function () {
+            return duration;
+        }
+    })
+
+}
+
+const clock = new StopWatch();
+~~~
+
+# Inherihance
+~~~txt     
+        IS-A relationship
+Circle  -------------------> Shape <-------------------  Square 
+Derived/Sub/Child            Base/Super/Parent
+                             computeOptimumLocation()
+Circle is-a Shape
+Square is-a Shape
+~~~
+
+# Prototype
+- Every object has a prototype except the root object
+~~~js
+let x = {};
+let y = {};
+
+if (Object.getPrototypeOf(x) === Object.getPrototypeOf(y)) {
+    console.log("Equals");
+} else {
+    console.log("Not Equals");
+}
+~~~
+
+- Property Descriptors
+~~~js
+let person = { name: 'heshan' };
+
+Object.defineProperty(person, "name", {
+    writable: false,
+    enumerable: true,
+    configurable: false
+});
+
+person.name = "Dilan";
+delete person.name;
+console.log(person);
+~~~
+
+- Instance members and Prototype members
+~~~js
+function Circle(radius) {
+    // Instance members
+    this.radius = radius;
+}
+
+// Prototype members
+Circle.prototype.draw = function () {
+    console.log("draw");
+}
+
+const c1 = new Circle(1);
+const c2 = new Circle(10);
+
+Circle.prototype.toString = function () {
+    return 'Circle with radius ' + this.radius;
+}
+
+console.log(c1.toString());
+console.log(c2.toString());
+~~~
+
+- Iterating Instance and Prototype members
+~~~js
+function Circle(radius) {
+    this.radius = radius;
+    this.move = function () {
+        console.log("move");
+    }
+}
+
+Circle.prototype.draw = function () {
+    console.log("draw");
+}
+
+const c1 = new Circle(1);
+
+// Returns instance members
+console.log(Object.keys(c1));
+
+// Returns all members(Instance + Prototype)
+for (let key in c1) console.log(key);
+~~~
