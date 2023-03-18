@@ -1,18 +1,23 @@
-function Circle(radius) {
-    this.radius = radius;
-    this.move = function () {
-        console.log("move");
-    }
+function extend(Child, Parent) {
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
 }
 
-Circle.prototype.draw = function () {
-    console.log("draw");
+function Shape() {
 }
 
-const c1 = new Circle(1);
+Shape.prototype.duplicate = function () {
+    console.log("duplicate");
+}
 
-// Returns instance members
-console.log(Object.keys(c1));
+function Circle() {
+}
+extend(Circle, Shape);
 
-// Returns all members(Instance + Prototype)
-for (let key in c1) console.log(key);
+Circle.prototype.duplicate = function () {
+    Shape.prototype.duplicate.call(this);
+    console.log("duplicate circle");
+}
+
+const c = new Circle();
+c.duplicate();

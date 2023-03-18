@@ -1295,3 +1295,154 @@ console.log(Object.keys(c1));
 // Returns all members(Instance + Prototype)
 for (let key in c1) console.log(key);
 ~~~
+
+- Prototypical Inheritance
+~~~js
+function Shape() {
+
+}
+
+Shape.prototype.duplicate = function () {
+    console.log("duplicate");
+}
+
+function Circle(radius) {
+    this.radius = radius;
+}
+
+// Circles prototype changing to Shapes prototype 
+Circle.prototype = Object.create(Shape.prototype); 
+
+Circle.prototype.draw = function () {
+    console.log("draw");
+}
+
+const s = new Shape();
+const c = new Circle(1);
+~~~
+
+- Whenever you reset the prototype need to reset the constructor as well
+~~~js
+function Shape() {
+
+}
+
+Shape.prototype.duplicate = function () {
+    console.log("duplicate");
+}
+
+function Circle(radius) {
+    this.radius = radius;
+}
+// Before changing
+// Circle.prototype.constructor = Circle
+// new Circle.prototype.constructor() => new Circle();
+
+// Circles prototype changing to Shapes prototype 
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+
+Circle.prototype.draw = function () {
+    console.log("draw");
+}
+
+const s = new Shape();
+const c = new Circle(1);
+~~~
+
+- Check below snippet
+~~~txt
+const c = Circle(1);
+~~~
+- When we define an object without the 'new' keyword, 'this' refers to the window object.
+
+~~~js
+function Shape(color) {
+    this.color = color;
+}
+
+Shape.prototype.duplicate = function () {
+    console.log("duplicate");
+}
+
+function Circle(radius, color) {
+    Shape.call(this, color);
+    this.radius = radius;
+}
+
+Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype.constructor = Circle;
+
+Circle.prototype.draw = function () {
+    console.log("draw");
+}
+
+function Square(size) {
+    this.size = size;
+}
+
+Square.prototype = Object.create(Shape.prototype);
+Square.prototype.constructor = Square;
+
+const c = new Circle(1, "red");
+~~~
+
+- Intermediate Function Inheritance
+~~~js
+function Shape(color) {
+    this.color = color;
+}
+
+Shape.prototype.duplicate = function () {
+    console.log("duplicate");
+}
+
+function extend(Child, Parent) {
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
+}
+
+function Circle(radius, color) {
+    Shape.call(this, color);
+    this.radius = radius;
+}
+extend(Circle, Shape);
+Circle.prototype.draw = function () {
+    console.log("draw");
+}
+
+function Square(size) {
+    this.size = size;
+}
+extend(Square, Shape);
+
+const c = new Circle(1, "red");
+const sq = new Square(10);
+~~~
+
+- Method Overriding
+~~~js
+function extend(Child, Parent) {
+    Child.prototype = Object.create(Parent.prototype);
+    Child.prototype.constructor = Child;
+}
+
+function Shape() {
+}
+
+Shape.prototype.duplicate = function () {
+    console.log("duplicate");
+}
+
+function Circle() {
+}
+extend(Circle, Shape);
+
+Circle.prototype.duplicate = function () {
+    Shape.prototype.duplicate.call(this);
+    console.log("duplicate circle");
+}
+
+const c = new Circle();
+c.duplicate();
+~~~
