@@ -1,34 +1,55 @@
-function mixin(target, ...sources) {
-    Object.assign(target, ...sources);
+function HTMLElement() {
+    this.click = function () {
+        console.log("click");
+    }
+};
+
+HTMLElement.prototype.focus = function () {
+    console.log("focus");
+};
+
+function HTMLSelectElement(items = []) {
+    this.items = items;
+
+    this.addItem = function (item) {
+        this.items.push(item);
+    }
+
+    this.removeItem = function (item) {
+        this.items.splice(this.items.indexOf(item), 1);
+    }
+
+    this.render = function () {
+        console.log(`<select>${this.items.map(item => `<option>${item}</option>`).join('')}</select>`)
+    }
+
+};
+
+HTMLSelectElement.prototype = new HTMLElement();
+HTMLSelectElement.prototype.constructor = HTMLSelectElement;
+
+const e = new HTMLElement();
+const s = new HTMLSelectElement([1, 2, 3, 4]);
+
+s.render();
+
+function HTMLImageElement(src = "") {
+    this.src = src;
+
+    this.render = function () {
+        console.log(`<img src="${this.src}"></img>`)
+    }
 }
 
-const canEat = {
-    eat: function () {
-        this.hunger--;
-        console.log("eating");
-    }
-};
+HTMLImageElement.prototype = new HTMLElement();
+HTMLImageElement.prototype.constructor = HTMLImageElement;
 
-const canWalk = {
-    walk: function () {
-        console.log("walking");
-    }
-};
+const img = new HTMLImageElement("http://location");
 
-const canSwim = {
-    swim: function () {
-        console.log("Swimming");
-    }
-};
+const elements = [
+    new HTMLSelectElement([1, 2]),
+    new HTMLImageElement()
+]
 
-function Person() { }
-mixin(Person.prototype, canEat, canWalk);
-
-const person = new Person();
-console.log(person);
-
-function GoldFish() { }
-mixin(GoldFish.prototype, canEat, canSwim);
-
-const goldFish = new GoldFish();
-console.log(goldFish);
+for (let element of elements)
+    element.render();
