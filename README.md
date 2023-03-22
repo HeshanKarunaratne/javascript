@@ -1578,3 +1578,95 @@ const elements = [
 for (let element of elements)
     element.render();
 ~~~
+
+# ES6 Classes
+~~~js
+class Circle {
+    constructor(radius) {
+        this.radius = radius;
+        this.move = function () {
+            console.log("move");
+        }
+    }
+
+    draw() {
+        console.log("draw");
+    }
+}
+
+const c = new Circle(1);
+~~~
+
+- Function Expressions are not hoisted, but Function Declarations are
+- Both Class Expressions and Declarations are not hoisted. Use Class Declaration whenever possible
+
+- Static functions
+~~~js
+class Circle {
+    constructor(radius) {
+        this.radius = radius;
+        this.move = function () {
+            console.log("move");
+        }
+    }
+
+    draw() {
+        console.log("draw");
+    }
+
+    static parse(str) {
+        const radius = JSON.parse(str).radius;
+        return new Circle(radius);
+    }
+}
+
+const circle = Circle.parse('{ "radius":1 }');
+console.log(circle);
+~~~
+
+- This keyword
+    - When you call draw() as a method on an object, this will point to that object
+    - When you call draw() as a standalone function, this will point to the global object
+~~~js
+const Circle = function () {
+    this.draw = function () { console.log(this); }
+};
+
+const c = new Circle();
+//Method call
+c.draw();
+
+const draw = c.draw;
+//Function call
+draw()
+~~~
+
+- By default body of classes in strict mode so that it prevents from modifying the global object
+~~~js
+class Circle {
+    draw() {
+        console.log(this);
+    }
+}
+const c = new Circle();
+const draw = c.draw;
+draw();
+~~~
+
+- Private Members with Symbols()
+~~~js
+const _radius = Symbol();
+const _draw = Symbol();
+
+class Circle {
+    constructor(radius) {
+        this[_radius] = radius;
+    }
+    [_draw]() {
+        console.log("draw");
+    }
+}
+
+const c = new Circle(1);
+console.log(c);
+~~~
