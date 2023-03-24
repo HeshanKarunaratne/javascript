@@ -1670,3 +1670,106 @@ class Circle {
 const c = new Circle(1);
 console.log(c);
 ~~~
+
+- WeakMap to make private members
+~~~js
+const _radius = new WeakMap();
+const _move = new WeakMap();
+
+class Circle {
+    constructor(radius) {
+        _radius.set(this, radius);
+        _move.set(this, () => {
+            console.log("move", this);
+        });
+    }
+    draw() {
+        _move.get(this)();
+        console.log("draw");
+    }
+}
+
+const c = new Circle(1);
+c.draw();
+~~~
+
+- Getters and Setters in ES6
+~~~js
+const _radius = new WeakMap();
+
+class Circle {
+    constructor(radius) {
+        _radius.set(this, radius);
+    }
+
+    get radius() {
+        return _radius.get(this);
+    }
+
+    set radius(value) {
+        if (value <= 0) throw new Error("Invalid Radius");
+        _radius.set(this, value);
+    }
+}
+
+const c = new Circle(1);
+~~~
+
+- Inheritance
+~~~js
+class Shape {
+    constructor(color) {
+        this.color = color;
+    }
+    move() {
+        console.log("move");
+    }
+}
+
+class Circle extends Shape {
+    constructor(color) {
+        super(color);
+    }
+
+    draw() {
+        console.log("draw");
+    }
+}
+
+const c = new Circle('red');
+~~~
+
+- Exercise
+~~~js
+const _items = new WeakMap();
+class Stack {
+
+    constructor() {
+        _items.set(this, []);
+    }
+
+    get count() {
+        return _items.get(this).length;
+    }
+
+    push(item) {
+        _items.get(this).push(item);
+    }
+
+    pop() {
+        const items = _items.get(this);
+        if (items.length === 0) throw new Error("Empty Stack");
+
+        return items.pop();
+    }
+
+    peek() {
+        const items = _items.get(this);
+        if (items.length === 0) throw new Error("Empty Stack");
+
+        return items[items.length - 1];
+    }
+}
+
+const stack = new Stack();
+~~~
