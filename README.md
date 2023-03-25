@@ -1773,3 +1773,28 @@ class Stack {
 
 const stack = new Stack();
 ~~~
+
+- Cohesion: Things that are highly related, they go together
+- Common JS Modules
+~~~js
+const Circle = require('./circle');
+
+const c = new Circle(1);
+c.draw();
+~~~
+
+~~~js
+const _radius = new WeakMap();
+
+class Circle {
+    constructor(radius) {
+        _radius.set(this, radius);
+    }
+
+    draw() {
+        console.log("Circle with radius " + _radius.get(this));
+    }
+}
+
+module.exports = Circle;
+~~~
